@@ -1,0 +1,27 @@
+{{ if site.Params.privacy_pack }}
+{{ $scr := .Scratch }}
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": {{ with site.Params.privacy_banner_background }} {{ . }} {{ else }} "#000000" {{ end }},
+          "text": {{ with site.Params.privacy_banner_text_color }} {{ . }} {{ else }} "#ffffff" {{ end }}
+        },
+        "button": {
+          "background": {{ with site.Params.privacy_banner_button_color }} {{ . }} {{ else }} "#00ff00" {{ end }},
+          "text": {{ with site.Params.privacy_banner_text_color }} {{ . }} {{ else }} "#ffffff" {{ end }}
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": {{ with site.Params.privacy_banner_message }} {{ . }} {{ else }} "This website uses cookies to ensure you get the best experience on our website."{{ end }},
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": {{ with site.Params.privacy_banner_link }} {{ . }} {{ else }} "Learn more" {{ end }}
+      }
+    })});
+</script>
+{{ end }}
